@@ -82,10 +82,11 @@ def main():
 
     print(f"verse_id:    {verse['verse_id']}")
     print(f"verse_index: {verse['verse_index']}")
-    print(f"book:        {verse['book']}")
+    print(f"book:        {verse['book']['name']}")
     print(f"chapter:     {verse['chapter']}")
     print(f"verse:       {verse['verse']}")
 
 
 if __name__ == "__main__":
+
     main()
