@@ -11,23 +11,71 @@ User Question
 LLM suggests Scripture reference
       ↓
 BibleBridge /api/resolve
-(reference normalization)
+(reference validation + normalization)
       ↓
 Canonical span (OSIS identifier)
       ↓
 BibleBridge /api/expand
 (atomic verse coordinates)
       ↓
-verse_index / verse_id
+verse_id / verse_index
+      ↓
+BibleBridge /api/passage
+(verified scripture retrieval)
 ```
 
 These canonical coordinates remain stable across translations and allow Scripture to be safely indexed, traversed, and analyzed.
+
+The resolver and canonical coordinate system are version-agnostic. The /passage endpoint retrieves a specific translation using those canonical coordinates.
 
 ---
 
 ## Included Examples
 
-### 1. LLM Grounding
+### 1. AI Hallucination Guard
+
+**`hallucination_guard_demo.py`**
+
+Demonstrates how BibleBridge prevents AI systems from hallucinating Scripture text by separating reference generation from scripture retrieval.
+
+**Pipeline:**
+```
+LLM → reference → /resolve → canonical span (OSIS) → /expand → verse coordinates → /passage → verified scripture
+```
+
+**Run:**
+```bash
+python hallucination_guard_demo.py
+```
+**Example output:**
+```
+User question:
+What does the Bible say about faith?
+
+--- AI Suggested Reference ---
+Hebrews 11:1
+
+--- Canonical OSIS Span ---
+Heb.11.1
+
+--- Canonical Coordinates ---
+verse_id:    58011001
+verse_index: 30174
+book:        Hebrews
+chapter:     11
+verse:       1
+
+Verse count: 1
+
+--- Verified Scripture ---
+
+Hebrews 11:1
+Now faith is the substance of things hoped for, the evidence of things not seen.
+```
+
+---
+
+### 2. LLM Grounding
 
 **`llm_grounding_demo.py`**
 
@@ -35,7 +83,7 @@ Demonstrates how to validate and canonicalize an LLM-generated Scripture referen
 
 **Pipeline:**
 ```
-LLM → reference → /resolve → canonical span → /expand → verse coordinates
+LLM → reference → /resolve → canonical span (OSIS) → /expand → verse coordinates
 ```
 
 **Run:**
@@ -65,7 +113,7 @@ verse:       1
 
 ---
 
-### 2. Slice Traversal
+### 3. Slice Traversal
 
 **`slice_traversal_demo.py`**
 
@@ -101,7 +149,7 @@ Hebrews 11:6   (index 30179)
 
 ---
 
-### 3. Verse Distance
+### 4. Verse Distance
 
 **`distance_demo.py`**
 
