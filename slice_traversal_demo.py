@@ -34,8 +34,9 @@ def main():
     result = slice_verses(verse_index)
 
     for v in result["data"]:
-        print(f"{v['book']} {v['chapter']}:{v['verse']}  (index {v['verse_index']})")
+        print(f"{v['book']['name']} {v['chapter']}:{v['verse']}  (index {v['verse_index']})")
 
 
 if __name__ == "__main__":
+
     main()
