@@ -205,6 +205,24 @@ https://holybible.dev/api-docs
 
 ---
 
+## What 340,000 Bible Cross-References Look Like
+
+Using the canonical verse coordinate system and the `/slice` traversal endpoint,
+BibleBridge enables structural analysis of relationships across the entire canon.
+
+Example visualization of ~340,000 Bible cross-references mapped across the
+global verse index (Genesis → Revelation):
+
+![Bible Cross-Reference Graph](https://holybible.dev/images/bible-crossrefs.webp)
+
+Arc color encodes canonical distance — short-range connections appear in cooler tones,
+while long-distance cross-canon connections appear in warmer tones.
+
+Article:  
+https://holybible.dev/docs/architecture/bible-cross-reference-visualization
+
+---
+
 ## About BibleBridge
 
 BibleBridge is a deterministic Scripture infrastructure API providing:
